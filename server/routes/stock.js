@@ -3,21 +3,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const multer = require('multer')
-
-
-const storage = multer.diskStorage({
-	destination: function(req, file, cb){
-		cb(null,'./server/images/');
-	},
-
-	filename: function(req,file,cb){
-		cb(null,file.originalname);
-	}
-})
-
-
-const uploud = multer({storage: storage})
 
 
 
@@ -31,10 +16,9 @@ app.use(bodyParser.json())
 
 //Post
 
-app.post('/agregar/bicicletas',uploud.single('bicimage'),(req,res) => {
+app.post('/agregar/bicicletas',(req,res) => {
 	console.log('POST /agregar/bicicletas')
 	console.log(req.body)
-	console.log(req.file)
 
 	let bici = new Bicicleta()
 	bici.Tipo = req.body.Tipo
@@ -47,5 +31,8 @@ app.post('/agregar/bicicletas',uploud.single('bicimage'),(req,res) => {
 		res.status(200).send({bicicletas: Bicicletasguardada})
 	})
 })
+
+
+
 
 module.exports = app;
