@@ -22,9 +22,8 @@ app.post('/agregar/bicicletas',(req,res) => {
 
 	let bici = new Bicicleta()
 	bici.Tipo = req.body.Tipo
-	bici.Cantidad = req.body.Cantidad
 	bici.Idsucursal = req.body.Idsucursal
-	bici.Descripcion = req.body.Descripcion
+	bici.Disponible = req.body.Disponible
 
 	bici.save((err, Bicicletasguardada)=>{
 		if(err) res.status(500).send({message:'Error al guardar en la base de datos'})
